@@ -1,69 +1,162 @@
 # youtube_API
-Olá! Recentemente, realizei uma análise utilizando a API do YouTube, e foi uma experiência incrível! Através dela, consegui explorar diversos dados sobre o canal oficial da Fórmula 1 e suas playlists. Esse projeto me permitiu aprimorar significativamente meus conhecimentos tanto em Python quanto em Power BI. 
-
-Este projeto tem como objetivo coletar, analisar e exportar dados dos vídeos de highlights publicados no canal oficial Fórmula 1 no YouTube durante o ano de 2024. Através da API do YouTube, foram coletadas métricas como visualizações, curtidas, comentários e engajamento, permitindo análises comparativas entre os vídeos.
 
 
-#  Como Rodar o Projeto  ?  
+Este projeto tem como objetivo analisar os vídeos de highlights das corridas de Fórmula 1 publicados no canal oficial da F1 no YouTube, com foco no ano de 2024. Através da API do YouTube, foram coletadas métricas como visualizações, curtidas, comentários e taxa de engajamento, permitindo análises comparativas entre os vídeos e insights sobre o desempenho do canal ao longo do tempo.
 
-1. Primeiro passo é instale dependencias para ultilizar a API do google 
+**Objetivo**
 
-    **pip install google-api-python-client pandas openpyxl**
+Criar um painel de visualização no Power BI com dados dos vídeos de highlights do canal oficial da Fórmula 1, promovendo análises sobre engajamento e desempenho dos vídeos publicados em 2024.
 
-2. O segundo passo é importar a função ue é usada para construir uma conexão com a API do Google 
+--------------------------------------------------------------------------------------
 
-    **from googleapiclient.discovery import build**
 
- 3. O terceiro passo consiste em você colocar a sua chave da API do youtube 
+
+Power Bi : https://app.powerbi.com/view?r=eyJrIjoiZmY3NTI0YzMtMTAyZC00ZmVhLThkZWMtMDIyOTQzYjNkODc4IiwidCI6IjRhMjJmMTE2LTUxY2UtNGZlMy1hZWFhLTljNDYxNDNkMDg4YiJ9
+
+
+
+
+
+
+**Funcionalidades**
+
+- Coleta automatizada de dados via API do YouTube (YouTube Data API v3)
+
+- Filtragem por palavra-chave (“highlights”) para garantir a relevância dos vídeos coletados
+
+- Exportação dos dados para Excel para facilitar a integração com o Power BI
+
+- Análises comparativas e visuais no Power BI (total de visualizações, curtidas, comentários, engajamento etc.)
+
+- Dashboard interativo com filtros por data, taxa de engajamento, vídeos mais vistos e mais comentados
+- 
+--------------------------------------------------------------------------------------
   
 
-4. O quarto passo é  criar o cliente da API do YouTube
+**Tecnologias e Ferramentas**
 
-  **youtube = build("youtube", "v3", developerKey='AIzaSyD877MaanmjiisQFwP9AsmE6QAhze7vwjc')**
+- Python (Google Colab): para coleta, tratamento e exportação dos dados
+
+- YouTube Data API v3: para acessar informações dos vídeos do canal
+
+- Pandas + Openpyxl: para manipulação e exportação dos dados
+
+- Power BI: para visualização e análise interativa dos dados
+
+--------------------------------------------------------------------------------------
+
+**Como Executar o Projeto**
+
+Instale as dependências necessárias:
+
+  - **pip install google-api-python-client pandas openpyxl**
+
+Importe a biblioteca para acessar a API do YouTube:
+
+ -  **from googleapiclient.discovery import build**
+
+Configure sua chave de API:
+
+  - **youtube = build("youtube", "v3", developerKey="SUA_CHAVE_AQUI")**
+
+Execute as funções de coleta e análise no Google ColabUtilizei o Google Colab por ser prático e acessível de qualquer lugar.
+
+--------------------------------------------------------------------------------------
+
+**Estrutura do Código**
+
+Funções organizadas por responsabilidade:
+
+ -  get_channel_id: obtém o ID do canal
+
+ -  get_highlight_videos: filtra vídeos com base no termo "highlights" e na data
+
+  - get_video_details: coleta métricas detalhadas de cada vídeo
+
+  - Tratamento de dados faltantes com .get() para evitar erros de execução
+
+  - Cálculo de métricas derivadas, como taxa de curtidas e engajamento
+
+  - Exportação final em formato .xlsx para análise posterior no Power BI
+
+--------------------------------------------------------------------------------------
 
 
-5. E quinto e ultimo passo é instalar a biblioteca pandas e a openpyxl para importação 
+**Principais Análises**
 
-   **pip install pandas openpyxl**
+   - Top 10 vídeos com maior número de visualizações
 
+   - Vídeos com maior taxa de curtidas
 
+  - Comparativo entre total de visualizações e inscritos
 
+  - Engajamento geral dos vídeos ao longo do tempo
 
+  - Comparação entre anos (2023 x 2024)
 
-
-Ultilizei o google colab para fazer minhas análises pois foi mais fácil pra mim porque eu pude acessar meu projeto e desenvolver ele em qualquer lugar. 
-Fiz Separação de funções para melhorar a organização do código.
-Ultilizei  parâmetros como channelId, publishedAfter, **q="highlights"** para análises específicas.
-Criei funções como get_channel_info, get_highlight_videos, get_video_details para modularizar o código, facilitando a manutenção e reutilização.
-Usei .get("campo", "Não disponível") para tratar situações em que a API não retorna certas métricas (como likes ou comentários).
-Priorizei métodos como channels().list, search().list e videos().list para obter dados do youtube.
-Optei por salvar os dados em Excel para facilitar o uso no Power BI, então fiz o máximo de análise que eu pude no google colab.
+   --------------------------------------------------------------------------------------
 
 
+**Decisões Técnicas**
+
+**API do YouTube**
+  - Utilizei a biblioteca googleapiclient.discovery para consumir a API do YouTube, que permitiu acessar informações do canal oficial da Fórmula 1 com segurança e eficiência.
+   
+  - A autenticação foi realizada por meio de uma chave da API armazenada diretamente no script, mantendo o acesso simples durante os testes.
+   
+  - Usei parâmetros como channelId, publishedAfter, q="highlights" e type="video" para refinar a busca e coletar apenas os vídeos relevantes, como os highlights de corridas.
+   
+  - Criei funções específicas como get_channel_id, get_highlight_videos e get_video_details para modularizar e organizar melhor o processo de coleta.
+
+**Visualização e Dashboard**
+   Toda a visualização dos dados foi feita no Power BI, por meio de dashboards interativos que permitem analisar os dados por ano, por engajamento e por vídeo.
+   
+   Salvei os dados no formato Excel (.xlsx) para facilitar a importação no Power BI e permitir atualizações manuais rápidas.
+   
+   Priorizei gráficos que comparam visualizações, curtidas e comentários, além de métricas como taxa de curtida e engajamento, possibilitando análises completas.
+   
+   A escolha pelo Power BI se deu pela flexibilidade de filtros, interatividade e facilidade de uso.
+
+**Organização do Código**
+
+  - Separei o código em funções modulares para tornar o processo de coleta mais organizado e reutilizável.
+   
+  - Cada função tem uma responsabilidade única (ex: coletar dados do canal, buscar vídeos, detalhar vídeos), o que facilita a leitura e manutenção.
+   
+  - Trabalhei com Google Colab por sua acessibilidade e por permitir continuar o projeto de qualquer lugar com praticidade.
+   
+  - Usei tratamento de erros com .get("campo", "Não disponível") para evitar falhas quando a API não retorna algum dado (como likes ou comentários).
+
+**Processamento de Dados**
+  - Utilizei a biblioteca pandas para organizar os dados coletados em DataFrames, o que facilitou a limpeza, manipulação e exportação dos dados.
+   
+  - Realizei transformações como ordenação por visualizações ou taxa de curtida, e adicionei métricas derivadas como:
+   
+  - Taxa de Curtida (likes / views)
+   
+  - Taxa de Engajamento (likes + comentários / views)
+   
+  - Optei por salvar os dados em Excel ao invés de banco de dados ou CSV para garantir compatibilidade com o Power BI e facilitar o compartilhamento.
 
 
+ --------------------------------------------------------------------------------------
 
-**Principais análises Feitas**
+   
 
-Informações gerais do canal (número de inscritos, visualizações, vídeos, descrição).
-Top 10 vídeos mais visualizados.
-Comparação entre inscritos e visualizações.
-Identificação de vídeos com títulos que incluem "highlights".
+**Desafios Encontrados**
 
 
-
-
-
-
-
-
-Apesar de ter sido um projeto em que consegui aprimorar meus conhecimentos em Python e no Power BI, enfrentei alguns desafios importantes durante o desenvolvimento. Em determinado momento, comecei a me confundir com os dados que estava gerando estava coletando muitas informações sem entender completamente o que cada dado representava, o que acabou dificultando o meu entendimento do código.
-Além disso, tive dificuldade em entender a lógica de funcionamento da API do YouTube, foi necessário estudar a documentação e ver tutoriais realizar de forma correta e extrair os dados que realmente fariam sentido para a análise.
-Outro ponto que me gerou confusão foi a organização dos dados para integração com o Power BI como acabei fazendo todo a análise no python na hora de passar para o BI fiquei um pouco perdida com as informações que tinha gerado e tive que ajustar o formato e estrutura dos dados para que a visualização no Power BI fosse realmente eficiente e útil para gerar insights.
-
-
-
-
+  - Compreensão da lógica da API: A documentação exigiu estudo detalhado para entender como extrair os dados certos.
+   
+  - Excesso de dados irrelevantes: Foi necessário aplicar filtros inteligentes para manter apenas os vídeos relacionados às corridas.
+   
+  - Integração com o Power BI: Ajustei o formato e estrutura dos dados exportados para uma visualização clara e eficiente no dashboard.
+   
+  - Limites da API: Lidei com cotas diárias de requisições, otimizando chamadas para não ultrapassar o limite.
+   
+  - Tratamento de dados incompletos: Alguns vídeos não apresentavam todos os dados esperados (curtidas, comentários), o que exigiu lógica extra de tratamento.
+   
+   o.
 
 
 
